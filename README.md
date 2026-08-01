@@ -455,7 +455,7 @@ Example:
 |:-----|:----------:|:-----------|:---------|
 | **Farhana Tasnin** | 222311053 | Department of Computer Science & Engineering, Varendra University | *Add GitHub / LinkedIn* |
 | **Katamun Jannat** | 222311058 | Department of Computer Science & Engineering, Varendra University | *Add GitHub / LinkedIn* |
-| **Md. Ratan Ali** | **222311069** | Department of Computer Science & Engineering, Varendra University | **[GitHub](https://github.com/yourusername)** • **[LinkedIn](https://linkedin.com/in/yourusername)** |
+| **Md. Ratan Ali** | **222311069** | Department of Computer Science & Engineering, Varendra University | **[GitHub](https://github.com/themdratanali)** • **[LinkedIn](https://linkedin.com/in/mdratanali)** |
 
 ---
 
@@ -463,7 +463,7 @@ Example:
 
 | Name | Designation | Profile |
 |:-----|:------------|:--------|
-| **Md. Fatin Ilham** | Lecturer, Department of Computer Science & Engineering, Varendra University | *Faculty Profile / University Website* |
+| **Md. Fatin Ilham** | Lecturer, Department of Computer Science & Engineering, Varendra University | [*Faculty*](https://vu.edu.bd/profile/02491/md-fatin-ilham) |
 
 ---
 
@@ -538,22 +538,9 @@ Special thanks to everyone who contributed directly or indirectly to the success
 
 | Name | Role |
 |:-----|:-----|
-| **Farhana Tasnin** | Developer |
-| **Katamun Jannat** | Developer |
-| **Md. Ratan Ali** | Developer, UI/UX Designer & Project Maintainer |
-
----
-
-# Citation
-
-If you use this project in your research or academic work, please cite it appropriately.
-
-```text
-AI-Powered Resume Analyzer and Resume Matching System
-Department of Computer Science & Engineering
-Varendra University
-2026
-```
+| **Md. Ratan Ali** | Backend Developer & Project Maintainer |
+| **Farhana Tasnin** | Frontend Developer |
+| **Katamun Jannat** | UI/UX Designer  |
 
 ---
 
