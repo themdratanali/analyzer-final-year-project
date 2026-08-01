@@ -1,8 +1,8 @@
 <div align="center">
 
-# AI-Powered Resume Analyzer & Resume Matching System
+# Resume Analyzer & Resume Matching System
 
-### Intelligent ATS Resume Analysis and Semantic Resume Matching Using AI, NLP & Machine Learning
+### Intelligent ATS Resume Analysis and Semantic Resume Matching Using NLP & Machine Learning
 
 <p align="center">
 
@@ -24,7 +24,7 @@
 
 # About
 
-The **AI-Powered Resume Analyzer & Resume Matching System** is a modern web-based recruitment platform designed to improve the hiring process using **Artificial Intelligence (AI)**, **Machine Learning (ML)**, and **Natural Language Processing (NLP)**.
+The **Resume Analyzer & Resume Matching System** is a modern web-based recruitment platform designed to improve the hiring process using **Machine Learning (ML)**, and **Natural Language Processing (NLP)**.
 
 The system helps **job seekers** create ATS-friendly resumes by analyzing resume quality and providing personalized improvement suggestions. It also assists **recruiters** by automatically matching resumes with job descriptions through semantic similarity analysis instead of simple keyword matching.
 
