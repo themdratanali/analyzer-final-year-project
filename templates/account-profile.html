@@ -1,0 +1,73 @@
+{% extends "base.html" %}
+
+{% block title %}{{ user.username }} - Profile{% endblock %}
+
+{% block extra_head %}
+<link rel="stylesheet" href="{{ url_for('static', filename='css/account-profile.css') }}">
+{% endblock %}
+
+{% block navbar %}{% endblock %}
+{% block footer %}{% endblock %}
+
+{% block content %}
+    <div class="main-content">
+        <div class="profile-card">
+            {% with messages = get_flashed_messages(with_categories=true) %}
+                {% if messages %}
+                    <ul class="flashes">
+                        {% for category, message in messages %}
+                            <li class="{{ category }}">{{ message }}</li>
+                        {% endfor %}
+                    </ul>
+                {% endif %}
+            {% endwith %}
+
+            <div class="profile-header">
+                <img src="{{ url_for('static', filename='images/profile.jpg') }}" alt="Profile Picture" class="profile-avatar" />
+                <h1>{{ user.username }}</h1>
+                <p>Manage and view your account details</p>
+            </div>
+
+            <div class="profile-info">
+                <h3 class="info-section-title">
+                    <i class="fas fa-user-circle"></i> Account Information
+                </h3>
+                <form action="{{ url_for('api.account.profile.update') }}" method="post">
+                    <div class="form-group">
+                        <label for="username">Full Name</label>
+                        <input type="text" id="username" name="username" value="{{ user.username }}" required />
+                    </div>
+                    <div class="form-group">
+                        <label for="email">Email Address</label>
+                        <input type="email" id="email" name="email" value="{{ user.email }}" required />
+                    </div>
+                    <div class="form-group">
+                        <label for="profile_type">Profile Type</label>
+                        <input type="text" id="profile_type" value="{{ 'User' if user.profile_type == 'user' else 'Organization' }}" disabled class="input-disabled" />
+                    </div>
+                    <button type="submit" class="btn-edit">
+                        <i class="fas fa-save"></i> Save Changes
+                    </button>
+                </form>
+            </div>
+
+            <div class="profile-info">
+                <h3 class="info-section-title">
+                    <i class="fas fa-shield-alt"></i> Security
+                </h3>
+                <div class="profile-info-item">
+                    <i class="fas fa-lock"></i>
+                    <span>Password: ********</span>
+                </div>
+                <a href="{{ url_for('auth.forgot-password') }}" class="btn-edit btn-secondary mt-12">
+                    <i class="fas fa-key"></i> Change Password
+                </a>
+            </div>
+        </div>
+    </div>
+
+{% endblock %}
+
+{% block extra_js %}
+<script src="{{ url_for('static', filename='js/account-profile.js') }}"></script>
+{% endblock %}

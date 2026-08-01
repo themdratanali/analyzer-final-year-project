@@ -1,0 +1,122 @@
+{% extends "base.html" %}
+
+{% block title %}Resume Match Results{% endblock %}
+
+{% block extra_head %}
+<link rel="stylesheet" href="{{ url_for('static', filename='css/app-results.css') }}" />
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet" />
+{% endblock %}
+
+{% block body_attributes %}data-top-score="{{ (similarity_scores[0] * 100)|round(0) if similarity_scores and similarity_scores[0] is defined else 0 }}"{% endblock %}
+
+{% block navbar %}{% endblock %}
+{% block footer %}{% endblock %}
+
+{% block content %}
+    <div class="container">
+        <div class="page-header">
+            <h1>
+                <i class="fas fa-file-contract"></i>
+                Resume Match Results
+            </h1>
+        </div>
+
+        <p class="subtitle">Resume matching results based on job description</p>
+
+        {% if advanced_meta and advanced_meta|length > 0 %}
+            <div class="models-badges">
+                <span class="model-badge">Sentence-BERT (all-MiniLM-L6-v2)</span>
+                <span class="model-badge">Cosine Similarity</span>
+                <span class="model-badge">TF-IDF + BOW + LSA</span>
+            </div>
+        {% endif %}
+
+        {% if message and message|strip %}
+            <div class="message-box">
+                <p>{{ message }}</p>
+            </div>
+        {% endif %}
+
+        {% if top_resumes %}
+            <div class="match-results-container">
+                <div class="match-score-card">
+                    <div class="score-display">
+                        <div class="score-circle-large">
+                            <svg viewBox="0 0 100 100">
+                                <circle class="bg" cx="50" cy="50" r="45"></circle>
+                                <circle class="progress" cx="50" cy="50" r="45"></circle>
+                            </svg>
+                            <div class="score-value">{{ (similarity_scores[0] * 100)|round(0) }}</div>
+                        </div>
+                        <div class="score-label">Top Match Score</div>
+                    </div>
+                    <div class="match-stats">
+                        <div class="stat-item">
+                            <span class="stat-number">{{ top_resumes|length }}</span>
+                            <span class="stat-label">Resumes Matched</span>
+                        </div>
+                        <div class="stat-item">
+                            <span class="stat-number">{{ (similarity_scores[0] * 100)|round(0) }}%</span>
+                            <span class="stat-label">Best Match</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="results-list">
+                    {% for index in range(top_resumes|length) %}
+                        {% set score_pct = (similarity_scores[index] * 100)|round(0) %}
+                        <div class="result-card">
+                            <div class="result-header">
+                                <div class="result-info">
+                                    <div class="result-icon">
+                                        <i class="fas fa-file-pdf"></i>
+                                    </div>
+                                    <div>
+                                        <div class="result-name">{{ top_resumes[index] }}</div>
+                                        <div class="result-date">
+                                            <i class="fas fa-percentage"></i>
+                                            Match Score
+                                        </div>
+                                    </div>
+                                </div>
+                                {% if score_pct >= 70 %}
+                                    <div class="score-badge score-high">{{ score_pct }}%</div>
+                                {% elif score_pct >= 40 %}
+                                    <div class="score-badge score-medium">{{ score_pct }}%</div>
+                                {% else %}
+                                    <div class="score-badge score-low">{{ score_pct }}%</div>
+                                {% endif %}
+                            </div>
+                            <div class="result-summary">
+                                <div class="progress-bar">
+                                    {% if score_pct >= 70 %}
+                                        <div class="progress-fill progress-green" data-width="{{ score_pct }}"></div>
+                                    {% elif score_pct >= 40 %}
+                                        <div class="progress-fill progress-yellow" data-width="{{ score_pct }}"></div>
+                                    {% else %}
+                                        <div class="progress-fill progress-red" data-width="{{ score_pct }}"></div>
+                                    {% endif %}
+                                </div>
+                                <div class="match-percentage">{{ score_pct }}% match</div>
+                            </div>
+                        </div>
+                    {% endfor %}
+                </div>
+            </div>
+        {% else %}
+            <div class="empty-state">
+                <i class="fas fa-search"></i>
+                <h3>No Matches Found</h3>
+                <p>Upload resumes and enter a job description to see matching results</p>
+                <a href="{{ url_for('tools.resume.match.start') }}" class="btn btn-primary">
+                    <i class="fas fa-plus"></i> New Match
+                </a>
+            </div>
+        {% endif %}
+    </div>
+
+{% endblock %}
+
+{% block extra_js %}
+<script src="{{ url_for('static', filename='js/tools-resume-match-result.js') }}"></script>
+{% endblock %}

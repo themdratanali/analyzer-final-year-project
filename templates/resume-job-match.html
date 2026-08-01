@@ -1,0 +1,57 @@
+{% extends "base.html" %}
+
+{% block title %}Resume Matcher - Upload{% endblock %}
+
+{% block extra_head %}
+<link rel="stylesheet" href="{{ url_for('static', filename='css/tools-resume-match.css') }}" />
+{% endblock %}
+
+{% block navbar %}{% endblock %}
+{% block footer %}{% endblock %}
+
+{% block content %}
+    <div class="page-container">
+        <div class="container">
+            <div class="upload-card">
+                <form method="POST" action="{{ url_for('api.resume.match.analyze') }}" enctype="multipart/form-data">
+                    <div class="form-group">
+                        <div class="form-header">
+                            <label for="job_description">
+                                <i class="fas fa-file-lines"></i> Job Description
+                            </label>
+                            <span class="required">*</span>
+                        </div>
+                        <textarea id="job_description" name="job_description" rows="6" placeholder="Paste the job description here. Include responsibilities, requirements, and desired qualifications..." required>{{ request.form.job_description or '' }}</textarea>
+                    </div>
+
+                    <div class="divider"></div>
+
+                    <div class="form-group">
+                        <div class="form-header">
+                            <label>
+                                <i class="fas fa-file-pdf"></i> Your Resume
+                            </label>
+                            <span class="required">*</span>
+                        </div>
+                        <small>Upload your resumes (PDF, DOCX, or TXT format) - Select multiple files</small>
+                        <div class="upload-area" onclick="document.getElementById('resumes').click()">
+                            <i class="fas fa-cloud-upload-alt"></i>
+                            <p id="file-label">Click to upload or drag and drop</p>
+                            <span class="file-hint">PDF, DOCX or TXT • Max 10MB each</span>
+                            <input type="file" id="resumes" name="resumes" accept=".pdf,.docx,.txt" multiple required onchange="updateFileName(this)" />
+                        </div>
+                    </div>
+
+                    <button type="submit" class="action-btn">
+                        <i class="fas fa-bolt"></i>
+                        <span>Analyze Match</span>
+                    </button>
+                </form>
+            </div>
+        </div>
+    </div>
+
+{% endblock %}
+
+{% block extra_js %}
+{% endblock %}

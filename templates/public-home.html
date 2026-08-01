@@ -1,0 +1,355 @@
+{% extends "base.html" %}
+
+{% block title %}Resume AI - Build, Analyze & Match Your Resume{% endblock %}
+
+{% block extra_head %}
+<meta name="description" content="AI-powered resume builder, analyzer, and job matching platform to land your dream job.">
+<link rel="stylesheet" href="{{ url_for('static', filename='css/public-home.css') }}">
+{% endblock %}
+
+{% block content %}
+
+    <section class="hero">
+        <div class="main-wrapper">
+            <div class="hero-container">
+                <div class="hero-content">
+                    <span class="hero-badge">AI-Powered Resume Platform</span>
+                    <h1>Build Your Perfect Resume & <span class="highlight">Land Your Dream Job</span></h1>
+                    <p>Create professional resumes, get AI-powered analysis, match with jobs, and stand out to recruiters with our all-in-one platform.</p>
+                    <div class="hero-actions">
+                        <a href="{{ url_for('auth.login') }}" class="btn btn-primary btn-lg">Start Free <i class="fas fa-arrow-right"></i></a>
+                        <a href="{{ url_for('tools.resume.analysis.upload') }}" class="btn btn-outline btn-lg">Try Demo</a>
+                    </div>
+                    <div class="hero-stats">
+                        <div class="stat">
+                            <span class="stat-number">10K+</span>
+                            <span class="stat-label">Resumes Analyzed</span>
+                        </div>
+                        <div class="stat">
+                            <span class="stat-number">85%</span>
+                            <span class="stat-label">Interview Rate</span>
+                        </div>
+                        <div class="stat">
+                            <span class="stat-number">500+</span>
+                            <span class="stat-label">Job Matches Daily</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="hero-visual">
+                    <div class="hero-card">
+                        <div class="card-header">
+                            <span class="card-dot"></span>
+                            <span class="card-dot"></span>
+                            <span class="card-dot"></span>
+                        </div>
+                        <div class="card-content">
+                            <div class="score-circle">
+                                <svg viewBox="0 0 100 100">
+                                    <circle class="bg" cx="50" cy="50" r="45" />
+                                    <circle class="progress" cx="50" cy="50" r="45" stroke-dasharray="283" stroke-dashoffset="70" />
+                                </svg>
+                                <div class="score-value score-valuehome">92</div>
+                            </div>
+                            <div class="score-label">Resume Score</div>
+                            <div class="score-bars">
+                                <div class="bar-item">
+                                    <span>Formatting</span><span class="bar-value">95%</span>
+                                </div>
+                                <div class="bar-item">
+                                    <span>Keywords</span><span class="bar-value">88%</span>
+                                </div>
+                                <div class="bar-item">
+                                    <span>Content</span><span class="bar-value">92%</span>
+                                </div>
+                                <div class="bar-item">
+                                    <span>Structure</span><span class="bar-value">90%</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="trusted-by-section">
+        <div class="main-wrapper">
+            <p class="trusted-label">Trusted by job seekers at leading companies worldwide</p>
+            <div class="trusted-logos">
+                <div class="trusted-logo"><i class="fab fa-google"></i><span>Google</span></div>
+                <div class="trusted-logo"><i class="fab fa-microsoft"></i><span>Microsoft</span></div>
+                <div class="trusted-logo"><i class="fab fa-amazon"></i><span>Amazon</span></div>
+                <div class="trusted-logo"><i class="fab fa-apple"></i><span>Apple</span></div>
+                <div class="trusted-logo"><i class="fab fa-meta"></i><span>Meta</span></div>
+                <div class="trusted-logo"><i class="fab fa-youtube"></i><span>YouTube</span></div>
+            </div>
+        </div>
+    </section>
+
+    <section class="services-section">
+        <div class="main-wrapper">
+            <div class="section-header">
+                <h2>Our Services</h2>
+                <p>Everything you need to accelerate your job search</p>
+            </div>
+            <div class="services-grid">
+                <div class="service-card">
+                    <div class="service-icon">
+                        <i class="fas fa-file-alt"></i>
+                    </div>
+                    <h3>Resume Analyzer</h3>
+                    <p>Get instant AI analysis and detailed feedback on your resume. Identify issues and get actionable tips to improve.</p>
+                    <ul class="service-features">
+                        <li>Resume Compatibility Score</li>
+                        <li>Keyword Analysis</li>
+                        <li>Formatting Review</li>
+                        <li>Improvement Suggestions</li>
+                    </ul>
+                    <a href="{{ url_for('tools.resume.analysis') }}" class="service-link">Try Now <i class="fas fa-arrow-right"></i></a>
+                </div>
+                <div class="service-card">
+                    <div class="service-icon">
+                        <i class="fas fa-search"></i>
+                    </div>
+                    <h3>Job Matching</h3>
+                    <p>Upload your resume and compare against job descriptions. See your match percentage and get tips to improve.</p>
+                    <ul class="service-features">
+                        <li>Match Percentage Score</li>
+                        <li>Gap Analysis</li>
+                        <li>Keyword Suggestions</li>
+                        <li>Bulk Resume Screening</li>
+                    </ul>
+                    <a href="{{ url_for('tools.job.match') }}" class="service-link">Try Now <i class="fas fa-arrow-right"></i></a>
+                </div>
+                <div class="service-card">
+                    <div class="service-icon">
+                        <i class="fas fa-pen-nib"></i>
+                    </div>
+                    <h3>Resume Builder</h3>
+                    <p>Create professional resumes with our easy-to-use builder. Choose from templates and export to PDF instantly.</p>
+                    <ul class="service-features">
+                        <li>Professional Templates</li>
+                        <li>Easy Editor</li>
+                        <li>PDF Export</li>
+                        <li>Custom Sections</li>
+                    </ul>
+                    <a href="{{ url_for('tools.resume.builder') }}" class="service-link">Try Now <i class="fas fa-arrow-right"></i></a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="benefits-section">
+        <div class="main-wrapper">
+            <div class="benefits-content">
+                <div class="benefits-text">
+                    <span class="benefits-badge"><i class="fas fa-sparkles"></i> Why Choose Us</span>
+                    <h2>The Smartest Way to Build, Analyze Your Resume</h2>
+                    <p>Our AI-powered platform combines cutting-edge technology with expert-crafted frameworks to give you an unfair advantage in the job market.</p>
+                    <ul class="benefits-list">
+                        <li>
+                            <span class="benefit-icon-circle"><i class="fas fa-robot"></i></span>
+                            <span class="benefit-content"><strong>AI-Powered Analysis</strong><span>Get detailed scoring and actionable insights powered by advanced machine learning algorithms.</span></span>
+                        </li>
+                        <li>
+                            <span class="benefit-icon-circle"><i class="fas fa-bolt"></i></span>
+                            <span class="benefit-content"><strong>Instant Results</strong><span>Receive comprehensive feedback in seconds, not hours. No more waiting for human review.</span></span>
+                        </li>
+                        <li>
+                            <span class="benefit-icon-circle"><i class="fas fa-shield-alt"></i></span>
+                            <span class="benefit-content"><strong>ATS-Optimized</strong><span>Every suggestion is designed to help your resume pass through Applicant Tracking Systems.</span></span>
+                        </li>
+                        <li>
+                            <span class="benefit-icon-circle"><i class="fas fa-chart-line"></i></span>
+                            <span class="benefit-content"><strong>Track Progress</strong><span>Monitor your improvement over time with detailed analytics and score history.</span></span>
+                        </li>
+                    </ul>
+                </div>
+                <div class="benefits-visual">
+                    <div class="stat-cards-grid">
+                        <div class="stat-card">
+                            <div class="stat-icon"><i class="fas fa-award"></i></div>
+                            <strong>Industry Leading Accuracy</strong>
+                            <p>Our AI has been trained on thousands of successful resumes across all major industries.</p>
+                        </div>
+                        <div class="stat-card">
+                            <div class="stat-icon"><i class="fas fa-lock"></i></div>
+                            <strong>Privacy First</strong>
+                            <p>Your data is encrypted end-to-end and never shared with third parties.</p>
+                        </div>
+                        <div class="stat-card">
+                            <div class="stat-icon"><i class="fas fa-sync-alt"></i></div>
+                            <strong>Continuous Updates</strong>
+                            <p>We regularly update our algorithms to match the latest ATS and hiring trends.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="how-it-works">
+        <div class="main-wrapper">
+            <div class="section-header">
+                <h2>How It Works</h2>
+                <p>Get started in six simple steps</p>
+            </div>
+            <div class="steps-grid">
+                <div class="step-item" data-step="1">
+                    <div class="step-icon">
+                        <i class="fas fa-cloud-upload-alt"></i>
+                    </div>
+                    <h3>Upload Your Resume</h3>
+                    <p>Upload your existing resume in PDF or DOCX format. Our system accepts all standard file types securely.</p>
+                </div>
+                <div class="step-item" data-step="2">
+                    <div class="step-icon">
+                        <i class="fas fa-robot"></i>
+                    </div>
+                    <h3>Get AI Analysis</h3>
+                    <p>Our AI scans your resume for formatting, keywords, content quality, and ATS compatibility with detailed scoring.</p>
+                </div>
+                <div class="step-item" data-step="3">
+                    <div class="step-icon">
+                        <i class="fas fa-magic"></i>
+                    </div>
+                    <h3>Improve & Optimize</h3>
+                    <p>Follow actionable suggestions to enhance weak sections, fix formatting issues, and boost your ATS compatibility score.</p>
+                </div>
+                <div class="step-item" data-step="4">
+                    <div class="step-icon">
+                        <i class="fas fa-pen-nib"></i>
+                    </div>
+                    <h3>Build Resume</h3>
+                    <p>Create your professional resume with our easy-to-use builder. Choose templates and export to PDF instantly.</p>
+                </div>
+                <div class="step-item" data-step="5">
+                    <div class="step-icon">
+                        <i class="fas fa-bullseye"></i>
+                    </div>
+                    <h3>Match With Jobs</h3>
+                    <p>Compare your optimized resume against job descriptions to see match percentage, skill gaps, and keyword coverage.</p>
+                </div>
+                <div class="step-item" data-step="6">
+                    <div class="step-icon">
+                        <i class="fas fa-chart-line"></i>
+                    </div>
+                    <h3>Track Progress</h3>
+                    <p>Monitor your improvement and see how your resume scores improve over time.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="testimonials-section">
+        <div class="main-wrapper">
+            <div class="section-header">
+                <h2 class="section-title">Success Stories</h2>
+                <p>Real results from job seekers who transformed their careers</p>
+            </div>
+            <div class="testimonials-slider">
+                <div class="testimonial-card">
+                    <div class="testimonial-rating">
+                        <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i>
+                    </div>
+                    <p class="testimonial-text">"The AI suggestions were incredibly specific. My resume score jumped from 45 to 88, and I started getting callbacks from companies I never thought possible."</p>
+                    <div class="testimonial-author">
+                        <div class="testimonial-avatar">RK</div>
+                        <div class="testimonial-info">
+                            <h4>Raj Kumar</h4>
+                            <span>Senior Software Engineer at Infosys</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="testimonial-card">
+                    <div class="testimonial-rating">
+                        <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star-half-alt"></i>
+                    </div>
+                    <p class="testimonial-text">"The job matching feature showed me exactly which skills I was missing. After adding those keywords, I got 3 interview calls in one week. Game changer!"</p>
+                    <div class="testimonial-author">
+                        <div class="testimonial-avatar">PS</div>
+                        <div class="testimonial-info">
+                            <h4>Priya Sharma</h4>
+                            <span>Product Manager at Flipkart</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="testimonial-card">
+                    <div class="testimonial-rating">
+                        <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i>
+                    </div>
+                    <p class="testimonial-text">"I rebuilt my entire resume using the builder. The templates are modern, clean, and ATS-friendly. Landed a job at my dream company within 2 weeks!"</p>
+                    <div class="testimonial-author">
+                        <div class="testimonial-avatar">AM</div>
+                        <div class="testimonial-info">
+                            <h4>Amit Mehta</h4>
+                            <span>Data Scientist at TCS</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="testimonial-card">
+                    <div class="testimonial-rating">
+                        <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i>
+                    </div>
+                    <p class="testimonial-text">"Best investment for my career. The detailed analysis helped me understand exactly what recruiters look for. Worth every rupee!"</p>
+                    <div class="testimonial-author">
+                        <div class="testimonial-avatar">SN</div>
+                        <div class="testimonial-info">
+                            <h4>Sneha Nair</h4>
+                            <span>UX Designer at Zomato</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="insights-section">
+        <div class="main-wrapper">
+            <div class="section-header">
+                <h2>Resume Insights & Tips</h2>
+                <p>Expert advice to help you create a standout resume</p>
+            </div>
+            <div class="insights-grid">
+                <article class="insight-card">
+                    <div class="insight-icon"><i class="fas fa-lightbulb"></i></div>
+                    <h3>ATS-Friendly Formatting</h3>
+                    <p>Learn the key formatting elements that help your resume pass through Applicant Tracking Systems and reach human recruiters.</p>
+                    <a href="#" class="insight-link">Read More <i class="fas fa-arrow-right"></i></a>
+                </article>
+                <article class="insight-card">
+                    <div class="insight-icon"><i class="fas fa-key"></i></div>
+                    <h3>Keyword Optimization</h3>
+                    <p>Discover how to identify and incorporate the right keywords from job descriptions to maximize your match percentage.</p>
+                    <a href="#" class="insight-link">Read More <i class="fas fa-arrow-right"></i></a>
+                </article>
+                <article class="insight-card">
+                    <div class="insight-icon"><i class="fas fa-chart-bar"></i></div>
+                    <h3>Quantify Your Achievements</h3>
+                    <p>Find out how to use numbers and metrics to demonstrate your impact and make your experience more compelling.</p>
+                    <a href="#" class="insight-link">Read More <i class="fas fa-arrow-right"></i></a>
+                </article>
+            </div>
+        </div>
+    </section>
+
+    <section class="newsletter-section">
+        <div class="main-wrapper">
+            <div class="newsletter-container">
+                <div class="newsletter-content">
+                    <h2>Get Resume Tips & Job Search Insights</h2>
+                    <p>Join 15,000+ job seekers who receive weekly expert advice on resume building, interview prep, and career growth.</p>
+                </div>
+                <form class="newsletter-form" onsubmit="event.preventDefault(); alert('Thanks for subscribing!');">
+                    <input type="email" placeholder="Enter your email address" required>
+                    <button type="submit" class="btn btn-primary">Subscribe</button>
+                </form>
+            </div>
+        </div>
+    </section>
+
+{% endblock %}
+
+{% block extra_js %}
+    <script src="{{ url_for('static', filename='js/public-home.js') }}"></script>
+{% endblock %}

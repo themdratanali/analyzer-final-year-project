@@ -1,0 +1,197 @@
+{% extends "base.html" %}
+
+{% block title %}Resume Analysis Result{% endblock %}
+
+{% block extra_head %}
+<link rel="stylesheet" href="{{ url_for('static', filename='css/tools-analysis-result.css') }}" />
+{% endblock %}
+
+{% block navbar %}{% endblock %}
+{% block footer %}{% endblock %}
+
+{% block content %}
+    <div class="page-wrap">
+        <header class="topbar">
+            <a href="{{ url_for('public.home') }}" class="brand">
+                <img src="{{ url_for('static', filename='images/logo.png') }}" alt="Resume Analyzer" />
+            </a>
+            <nav class="topnav">
+                <a href="{{ url_for('tools.resume.analysis.upload') }}" class="topnav-link">New Analysis</a>
+                <a href="{{ url_for('app.dashboard') }}" class="topnav-link">Dashboard</a>
+            </nav>
+        </header>
+
+        <main class="result-layout">
+            <section class="result-hero">
+                <div class="result-hero-glow" aria-hidden="true"></div>
+                <div class="result-hero-content">
+                    <h1>Analysis Complete</h1>
+                    <p class="result-hero-subtitle">Model-powered evaluation based on ATS rules, semantic similarity, and entity extraction.</p>
+                    <div class="score-orb">
+                        <svg class="score-orb-ring" viewBox="0 0 180 180" aria-hidden="true">
+                            <defs>
+                                <linearGradient id="scoreGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+                                    <stop offset="0%" stop-color="#5550FA" />
+                                    <stop offset="50%" stop-color="#DB12E8" />
+                                    <stop offset="100%" stop-color="#51DAFC" />
+                                </linearGradient>
+                            </defs>
+                            <circle class="score-orb-bg" cx="90" cy="90" r="78" />
+                            <circle class="score-orb-progress" cx="90" cy="90" r="78" />
+                        </svg>
+                        <div class="score-orb-body">
+                            <span class="score-orb-number">{{ score }}</span>
+                            <span class="score-orb-max">/100</span>
+                        </div>
+                    </div>
+                    <div class="model-pills">
+                        <span class="model-pill">Rule-Based ATS</span>
+                        <span class="model-pill">Sentence-BERT</span>
+                        <span class="model-pill">spaCy NER</span>
+                        <span class="model-pill">Cosine Similarity</span>
+                    </div>
+                </div>
+            </section>
+
+            <section class="result-grid">
+                <div class="result-card">
+                    <h2>Category Breakdown</h2>
+                    <div class="category-list">
+                        {% for item in results %}
+                            {% if item is mapping and item.score is defined and item.max_score is defined %}
+                                {% set pct = (item.score / item.max_score * 100) if item.max_score > 0 else 0 %}
+                                <div class="category-row">
+                                    <div class="category-header">
+                                        <span class="category-name">
+                                            {{ item.category }}
+                                            {% if item.model %}
+                                                <span class="model-tag">({{ item.model }})</span>
+                                            {% endif %}
+                                        </span>
+                                        <span class="category-value">{{ item.score }}/{{ item.max_score }} · {{ pct|round(1) }}%</span>
+                                    </div>
+                                    <div class="progress-track">
+                                        <div class="progress-bar" data-width="{{ (item.score * 100 / item.max_score)|round(1) if item.max_score > 0 else 0 }}"></div>
+                                    </div>
+                                </div>
+                            {% endif %}
+                        {% endfor %}
+                    </div>
+                </div>
+
+                <div class="result-card">
+                    <h2>Top Suggestions</h2>
+                    {% if suggestions %}
+                        <ul class="suggestion-list">
+                            {% for sug in suggestions %}
+                                <li>{{ sug }}</li>
+                            {% endfor %}
+                        </ul>
+                    {% else %}
+                        <p class="empty-state">No suggestions available for this analysis.</p>
+                    {% endif %}
+                </div>
+
+                <div class="result-card">
+                    <h2>Insights</h2>
+                    <div class="insight-grid">
+                        <div class="insight-box">
+                            <h3>Strong Areas</h3>
+                            <ul>
+                                {% for item in results if item is mapping and item.score is defined and item.max_score is defined and item.max_score > 0 and (item.score / item.max_score) >= 0.8 %}
+                                    <li><strong>{{ item.category }}</strong> · {{ (item.score / item.max_score * 100)|round(0) }}%</li>
+                                {% else %}
+                                    <li class="muted">No strong categories yet.</li>
+                                {% endfor %}
+                            </ul>
+                        </div>
+                        <div class="insight-box">
+                            <h3>Improve These</h3>
+                            <ul>
+                                {% for item in results if item is mapping and item.score is defined and item.max_score is defined and item.max_score > 0 and (item.score / item.max_score) < 0.8 %}
+                                    <li><strong>{{ item.category }}</strong> · {{ (item.score / item.max_score * 100)|round(0) }}%</li>
+                                {% else %}
+                                    <li class="muted">All categories look solid.</li>
+                                {% endfor %}
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <section class="details-section">
+                {% for item in results %}
+                    {% if item.flaws or item.fix_tips or item.suggestions %}
+                        <article class="detail-card">
+                            <h3>{{ item.category }}</h3>
+                            {% if item.flaws %}
+                                <div class="detail-block">
+                                    <h4>Issues</h4>
+                                    <ul>
+                                        {% for flaw in item.flaws %}<li>{{ flaw }}</li>{% endfor %}
+                                    </ul>
+                                </div>
+                            {% endif %}
+                            {% if item.fix_tips %}
+                                <div class="detail-block">
+                                    <h4>Fixes</h4>
+                                    <ul>
+                                        {% for tip in item.fix_tips %}<li>{{ tip }}</li>{% endfor %}
+                                    </ul>
+                                </div>
+                            {% endif %}
+                            {% if item.suggestions %}
+                                <div class="detail-block">
+                                    <h4>Suggestions</h4>
+                                    <ul>
+                                        {% for suggestion in item.suggestions %}<li>{{ suggestion }}</li>{% endfor %}
+                                    </ul>
+                                </div>
+                            {% endif %}
+                        </article>
+                    {% endif %}
+                {% endfor %}
+            </section>
+
+            <section class="keyword-section">
+                <h2>Keyword Gap Analysis</h2>
+                <p class="keyword-section-subtitle">Paste a job description to compare your resume against role requirements.</p>
+                <textarea id="job-description-input" class="job-input" placeholder="Paste job description here..." rows="5"></textarea>
+                <button id="analyze-keywords" class="btn-primary">Analyze Keywords</button>
+                <div id="keyword-error" class="error-message"></div>
+                <div id="keyword-loading" class="loading">Analyzing keywords...</div>
+                <div id="keyword-result" class="keyword-result">
+                    <div class="keyword-card">
+                        <h3>Matched Skills</h3>
+                        <ul id="matched-keywords"></ul>
+                    </div>
+                    <div class="keyword-card">
+                        <h3>Missing Skills</h3>
+                        <ul id="missing-keywords"></ul>
+                    </div>
+                </div>
+                <div id="keyword-advanced-result" class="keyword-result">
+                    <div class="keyword-card">
+                        <h3>Advanced Coverage Stats</h3>
+                        <ul id="keyword-stats"></ul>
+                    </div>
+                    <div class="keyword-card">
+                        <h3>Ensemble Model Components</h3>
+                        <ul id="ensemble-components"></ul>
+                    </div>
+                </div>
+            </section>
+
+            <div class="result-actions">
+                <a href="{{ url_for('tools.resume.analysis.upload') }}" class="btn-primary">Analyze Another Resume</a>
+            </div>
+        </main>
+    </div>
+
+    <script type="application/json" id="resume-text-data">{{ resume_text | default('') | tojson | safe }}</script>
+
+{% endblock %}
+
+{% block extra_js %}
+<script src="{{ url_for('static', filename='js/tools-analysis-result.js') }}"></script>
+{% endblock %}

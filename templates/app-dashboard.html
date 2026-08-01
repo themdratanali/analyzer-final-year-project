@@ -1,0 +1,191 @@
+{% extends "base.html" %}
+
+{% block title %}{{ user.username }} - Resume Analyzer{% endblock %}
+
+{% block extra_head %}
+<link rel="stylesheet" href="{{ url_for('static', filename='css/app-dashboard.css') }}?v=3" />
+<script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
+{% endblock %}
+
+{% block body_attributes %}data-username="{{ user.username }}" data-api-analyze-url="{{ url_for('api.resume.analyze') }}" data-set-fresh-upload-url="{{ url_for('api.resume.fresh-upload') }}" data-dashboard-url="{{ url_for('app.dashboard') }}" data-logout-url="{{ url_for('auth.logout') }}"{% endblock %}
+
+{% block navbar %}{% endblock %}
+{% block footer %}{% endblock %}
+
+{% block content %}
+    <div class="main-content">
+        <div class="sidebar">
+            <div class="sidebar-logo">
+                <a href="{{ url_for('employers') }}">
+                    <img src="{{ url_for('static', filename='images/logo.png') }}" alt="Logo" />
+                </a>
+            </div>
+            <ul class="sidebar-menu">
+                {% if user.profile_type == 'organization' %}
+                    <li>
+                        <a href="javascript:void(0)" onclick="showContent('resume-analyzer', this); return false;"><i class="fas fa-file-alt"></i> Resume Analyzer</a>
+                    </li>
+                    <li>
+                        <a href="javascript:void(0)" onclick="showContent('resume-match', this); return false;"><i class="fas fa-search"></i> Resume Match</a>
+                    </li>
+                    <li>
+                        <a href="javascript:void(0)" onclick="showContent('resume-builder', this); return false;"><i class="fas fa-pen-nib"></i> Resume Builder</a>
+                    </li>
+                    <li>
+                        <a href="javascript:void(0)" onclick="showContent('results-panel', this); return false;"><i class="fas fa-folder-open"></i> Documents</a>
+                    </li>
+                {% else %}
+                    <li>
+                        <a href="javascript:void(0)" onclick="showContent('resume-analyzer', this); return false;"><i class="fas fa-file-alt"></i> Resume Analyzer</a>
+                    </li>
+                    <li>
+                        <a href="javascript:void(0)" onclick="showContent('resume-builder', this); return false;"><i class="fas fa-pen-nib"></i> Resume Builder</a>
+                    </li>
+                    <li>
+                        <a href="javascript:void(0)" onclick="showContent('results-panel', this); return false;"><i class="fas fa-folder-open"></i> Documents</a>
+                    </li>
+                {% endif %}
+            </ul>
+            
+            <hr class="sidebar-profile-separator" />
+
+            <div class="sidebar-profile">
+                <div class="profile-btn" onclick="toggleProfileMenu()">
+                    <div class="profile-avatar">
+                        <i class="fas fa-user"></i>
+                    </div>
+                    <div class="profile-info">
+                        <div class="profile-name">{{ user.username }}</div>
+                        <div class="profile-email">{{ user.email }}</div>
+                    </div>
+                    <i class="fas fa-chevron-down profile-chevron"></i>
+                </div>
+                <div class="profile-menu" id="profile-menu">
+                    <a href="javascript:void(0)" class="profile-menu-item" onclick="showContent('profile-panel', this); toggleProfileMenu(); return false;"><i class="fas fa-cog"></i> Account Settings</a>
+                    <a href="javascript:void(0)" class="profile-menu-item" onclick="alert('Change Password feature coming soon'); return false;"><i class="fas fa-key"></i> Change Password</a>
+                    <a href="#" class="profile-menu-item logout-item" onclick="confirmLogout(); return false;"><i class="fas fa-sign-out-alt"></i> Log Out</a>
+                </div>
+            </div>
+        </div>
+
+        <div class="content-area">
+            <div id="match-resumes" class="content-section">
+                <div class="upload-section">
+                    <div class="upload-card">
+                        <h2><i class="fas fa-users"></i> Match Resumes to Jobs</h2>
+                        <p class="muted-copy">Upload job descriptions and multiple resumes to find the best candidates.</p>
+                        <a href="{{ url_for('tools.resume.match.start') }}" class="action-btn">Go to Match Resumes</a>
+                    </div>
+                </div>
+            </div>
+
+            <div id="analytics" class="content-section">
+                <div class="placeholder">
+                    <h2>Analytics Dashboard</h2>
+                    <p>Track your resume performance and job application metrics.</p>
+                    <small>Coming soon: analytics and insights for your job search.</small>
+                </div>
+            </div>
+
+            <div id="resume-analyzer" class="content-section">
+                <div class="upload-section">
+                    <div class="upload-card">
+                        <h2><i class="fas fa-cloud-upload-alt"></i> Upload Your Resume</h2>
+                        <form id="resume-analyzer-form" enctype="multipart/form-data">
+                            <div class="upload-area" onclick="document.getElementById('resume').click()">
+                                <i class="fas fa-file-pdf"></i>
+                                <p id="file-label">Select PDF or DOCX File</p>
+                                <input type="file" id="resume" name="resume" accept=".pdf,.docx" required onchange="updateFileName(this)" />
+                            </div>
+                            <button type="submit" class="action-btn">Analyze Resume</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+
+            <div id="analyzer-modal" class="analyzer-modal" aria-hidden="true">
+                <div class="analyzer-modal-backdrop"></div>
+                <div class="analyzer-modal-card" role="dialog" aria-modal="true" aria-labelledby="analyzer-modal-title">
+                    <div class="analyzer-spinner">
+                        <div class="analyzer-spinner-ring"></div>
+                        <div class="analyzer-spinner-ring"></div>
+                        <div class="analyzer-spinner-ring"></div>
+                    </div>
+                    <div class="analyzer-loader-text">
+                        <span class="analyzer-loader-title" id="analyzer-modal-title">Analyzing your resume</span>
+                        <span class="analyzer-loader-subtitle">Running model-based assessment</span>
+                    </div>
+                </div>
+            </div>
+
+            <div id="resume-builder" class="content-section">
+                <iframe src="{{ url_for('app.resume.builder.editor') }}" class="content-iframe" title="Resume Builder"></iframe>
+            </div>
+
+            <div id="home-panel" class="content-section active">
+                <div class="home-panel">
+                    <div class="feature-grid">
+                        <div class="feature-card">
+                            <div class="feature-icon-box feature-icon-blue-bg">
+                                <i class="fas fa-file-alt feature-icon feature-icon-blue"></i>
+                            </div>
+                            <h4 class="feature-card-title">Resume Analyzer</h4>
+                            <p class="feature-card-copy">Upload your resume (PDF/DOCX) and get a detailed Resume Analyzer score. Check formatting, keywords, sections, and get improvement tips.</p>
+                        </div>
+                        <div class="feature-card">
+                            <div class="feature-icon-box feature-icon-green-bg">
+                                <i class="fas fa-pen-nib feature-icon feature-icon-green"></i>
+                            </div>
+                            <h4 class="feature-card-title">Resume Builder</h4>
+                            <p class="feature-card-copy">Create professional resumes with our easy-to-use builder. Add personal info, education, experience, skills, and download as PDF.</p>
+                        </div>
+                        {% if user.profile_type == 'organization' %}
+                            <div class="feature-card">
+                                <div class="feature-icon-box feature-icon-yellow-bg">
+                                    <i class="fas fa-search feature-icon feature-icon-yellow"></i>
+                                </div>
+                                <h4 class="feature-card-title">Resume Match</h4>
+                                <p class="feature-card-copy">Paste a job description and upload multiple resumes. Get a match percentage for each resume to find the best candidates.</p>
+                            </div>
+                        {% endif %}
+                    </div>
+                </div>
+            </div>
+
+            <div id="results-panel" class="content-section">
+                <iframe src="{{ url_for('app.resume.results') }}" class="content-iframe" title="Results"></iframe>
+            </div>
+
+            <div id="documents-panel" class="content-section">
+                <iframe src="{{ url_for('app.documents') }}" class="content-iframe" title="Documents"></iframe>
+            </div>
+
+            <div id="match-history-panel" class="content-section">
+                <iframe src="{{ url_for('app.match.history') }}" class="content-iframe" title="Match History"></iframe>
+            </div>
+
+            <div id="resume-match" class="content-section">
+                <iframe src="{{ url_for('tools.resume.match.start') }}" class="content-iframe" title="Resume Match"></iframe>
+            </div>
+
+            <div id="profile-panel" class="content-section">
+                <iframe src="{{ url_for('account.profile', embedded='1') }}" class="content-iframe" title="Account Settings"></iframe>
+            </div>
+        </div>
+
+        <div class="logout-modal" id="logout-modal">
+            <div class="logout-modal-card">
+                <h3>Are you sure you want to logout?</h3>
+                <div class="logout-modal-actions">
+                    <button type="button" class="logout-modal-btn logout-modal-cancel" onclick="closeLogoutModal()">No</button>
+                    <button type="button" class="logout-modal-btn logout-modal-confirm" onclick="logoutNow()">Yes</button>
+                </div>
+            </div>
+        </div>
+
+    </div>
+{% endblock %}
+
+{% block extra_js %}
+        <script src="{{ url_for('static', filename='js/app-dashboard.js') }}?v=7"></script>
+{% endblock %}

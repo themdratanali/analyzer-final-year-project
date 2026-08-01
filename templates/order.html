@@ -1,0 +1,45 @@
+{% extends "base.html" %}
+
+{% block title %}Order Confirmation - Resume AI{% endblock %}
+
+{% block extra_head %}
+<link rel="stylesheet" href="{{ url_for('static', filename='css/billing-pricing.css') }}">
+{% endblock %}
+
+{% block content %}
+<section class="page-hero">
+    <div class="main-wrapper page-hero-center">
+        <span class="hero-badge">Checkout</span>
+        <h1>Order Confirmation</h1>
+        <p>Review your selected plan and complete your purchase to unlock Resume AI features.</p>
+    </div>
+</section>
+
+<section class="order-section">
+    <div class="main-wrapper">
+        <div class="order-card">
+            <div class="order-icon">
+                <i class="fas fa-check-circle"></i>
+            </div>
+            <h2>Thank you for your order!</h2>
+            <p class="order-subtitle">Your subscription is being processed. A confirmation email will arrive shortly.</p>
+
+            <div class="order-details">
+                <div class="order-row">
+                    <span>Selected Plan</span>
+                    <strong>{{ plan | capitalize if plan else 'Professional' }}</strong>
+                </div>
+                <div class="order-row">
+                    <span>Status</span>
+                    <strong class="order-status">Confirmed</strong>
+                </div>
+            </div>
+
+            <div class="order-actions">
+                <a href="{{ url_for('app.dashboard') }}" class="btn btn-primary">Go to Dashboard</a>
+                <a href="{{ url_for('billing.pricing') }}" class="btn btn-outline">Back to Pricing</a>
+            </div>
+        </div>
+    </div>
+</section>
+{% endblock %}

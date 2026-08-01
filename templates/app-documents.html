@@ -1,0 +1,81 @@
+{% extends "base.html" %}
+
+{% block title %}Documents - Resume Analyzer{% endblock %}
+
+{% block extra_head %}
+<link rel="stylesheet" href="{{ url_for('static', filename='css/app-documents.css') }}" />
+{% endblock %}
+
+{% block navbar %}{% endblock %}
+{% block footer %}{% endblock %}
+
+{% block content %}
+    <div class="page-container">
+        <div class="container">
+            <div class="page-header">
+                <h1>
+                    <i class="fas fa-folder-open"></i>
+                    My Documents
+                </h1>
+            </div>
+
+            <p class="subtitle">View and manage your uploaded resumes</p>
+
+            <div class="filter-tabs">
+                <button class="filter-tab active" onclick="filterDocuments('analyzer', this)">Resume Analyzer</button>
+                <button class="filter-tab" onclick="filterDocuments('match', this)">Resume Match History</button>
+                <button class="filter-tab" onclick="filterDocuments('builder', this)">Resume Builder</button>
+            </div>
+
+            {% if files %}
+                <div class="documents-grid" id="documents-grid">
+                    {% for file in files %}
+                        <div class="document-card" data-category="{{ file.category_id }}">
+                            <div class="doc-header">
+                                <div class="doc-icon">
+                                    <i class="fas fa-file-pdf"></i>
+                                </div>
+                                <div class="doc-name">{{ file.name }}</div>
+                            </div>
+
+                            <span class="doc-category cat-{{ file.category_id }}">{{ file.category }}</span>
+
+                            <div class="doc-info">
+                                <span>
+                                    <i class="fas fa-database"></i>
+                                    {{ file.size }} KB
+                                </span>
+                                <span>
+                                    <i class="fas fa-calendar"></i>
+                                    {{ file.date }}
+                                </span>
+                            </div>
+
+                            <div class="doc-actions">
+                                <a href="{{ url_for('api.documents.download', filename=file.name, category=file.category_id) }}" class="btn btn-download">
+                                    <i class="fas fa-download"></i>
+                                    Download
+                                </a>
+                                <a href="{{ url_for('api.documents.delete', filename=file.name, category=file.category_id) }}" class="btn btn-delete" onclick="return confirm('Delete this file?');">
+                                    <i class="fas fa-trash"></i>
+                                    Delete
+                                </a>
+                            </div>
+                        </div>
+                    {% endfor %}
+                </div>
+            {% else %}
+                <div class="empty-state">
+                    <i class="fas fa-folder-open"></i>
+                    <h3>No documents yet</h3>
+                    <p>Upload your first resume to get started</p>
+                </div>
+            {% endif %}
+        </div>
+    </div>
+
+{% endblock %}
+
+{% block extra_js %}
+    <script src="{{ url_for('static', filename='js/app-documents.js') }}"></script>
+{% endblock %}

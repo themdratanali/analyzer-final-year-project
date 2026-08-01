@@ -1,0 +1,335 @@
+{% extends "base.html" %}
+
+{% block title %}Pricing - Resume Analyzer{% endblock %}
+
+{% block extra_head %}
+<link rel="stylesheet" href="{{ url_for('static', filename='css/billing-pricing.css') }}">
+{% endblock %}
+
+{% block body_attributes %}data-is-logged-in="{{ 'true' if session.get('user_id') else 'false' }}"{% endblock %}
+
+{% block content %}
+
+    <section class="page-hero">
+        <div class="main-wrapper page-hero-center">
+            <span class="hero-badge">Simple, Transparent Pricing</span>
+            <h1>Choose the plan that fits your career goals</h1>
+            <p>No hidden fees. Cancel anytime. Start with a 7-day free trial.</p>
+
+            <div class="pricing-toggle">
+                <span id="monthly-label">Monthly</span>
+                <div class="toggle-switch" onclick="togglePricing()"></div>
+                <span id="annual-label">Annual</span>
+                <span class="save-badge">Save 20%</span>
+            </div>
+        </div>
+    </section>
+
+    <section class="pricing-container">
+        <div class="pricing-plan">
+            <div class="plan-header">
+                <div class="plan-name">Free</div>
+                <div class="plan-price">
+                    <span class="amount">$0</span>
+                    <span class="period">/month</span>
+                </div>
+                <p class="plan-description">Perfect for trying out our platform</p>
+            </div>
+
+            <ul class="plan-features">
+                <li><i class="fas fa-check"></i> 1 Resume Analyzer/month</li>
+                <li><i class="fas fa-check"></i> Basic Score & Feedback</li>
+                <li><i class="fas fa-check"></i> 3 Job Match Checks</li>
+                <li><i class="fas fa-check"></i> Resume Templates Access</li>
+                <li class="disabled"><i class="fas fa-minus"></i> Priority Support</li>
+                <li class="disabled"><i class="fas fa-minus"></i> Team Management</li>
+            </ul>
+
+            <a href="#" class="btn btn-outline select-btn" data-plan="free">Get Started</a>
+        </div>
+
+        <div class="pricing-plan featured">
+            <div class="popular-badge">Most Popular</div>
+            <div class="plan-header">
+                <div class="plan-name">Professional</div>
+                <div class="plan-price">
+                    <span class="currency">$</span>
+                    <span class="amount" id="pro-price">12.99</span>
+                    <span class="period" id="pro-period">/month</span>
+                </div>
+                <p class="plan-description">For serious job seekers</p>
+            </div>
+
+            <ul class="plan-features">
+                <li><i class="fas fa-check"></i> Unlimited Resume Analyzer</li>
+                <li><i class="fas fa-check"></i> Detailed Score & Improvement Tips</li>
+                <li><i class="fas fa-check"></i> Unlimited Job Matching</li>
+                <li><i class="fas fa-check"></i> Full Resume Builder with PDF Export</li>
+                <li><i class="fas fa-check"></i> Priority Email Support</li>
+                <li><i class="fas fa-check"></i> ATS Compatibility Check</li>
+            </ul>
+
+            <a href="#" class="btn btn-primary select-btn" data-plan="professional">Start Free Trial</a>
+        </div>
+
+        <div class="pricing-plan">
+            <div class="plan-header">
+                <div class="plan-name">Enterprise</div>
+                <div class="plan-price">
+                    <span class="currency">$</span>
+                    <span class="amount" id="enterprise-price">29</span>
+                    <span class="period" id="enterprise-period">/month</span>
+                </div>
+                <p class="plan-description">For teams and organizations</p>
+            </div>
+
+            <ul class="plan-features">
+                <li><i class="fas fa-check"></i> Everything in Professional</li>
+                <li><i class="fas fa-check"></i> Team Management Dashboard</li>
+                <li><i class="fas fa-check"></i> Bulk Resume Screening</li>
+                <li><i class="fas fa-check"></i> Custom Integrations (API)</li>
+                <li><i class="fas fa-check"></i> Dedicated Account Manager</li>
+                <li><i class="fas fa-check"></i> Custom Branding</li>
+                <li><i class="fas fa-check"></i> 24/7 Priority Support</li>
+            </ul>
+
+            <a href="#" class="btn btn-outline select-btn" data-plan="enterprise">Contact Sales</a>
+        </div>
+    </section>
+
+    <section class="services-section">
+        <div class="main-wrapper">
+            <div class="section-header">
+                <h2>What's Included</h2>
+                <p>Our AI-powered tools help you land your dream job faster</p>
+            </div>
+
+            <div class="services-grid">
+                <div class="service-card">
+                    <div class="service-icon">
+                        <i class="fas fa-file-alt"></i>
+                    </div>
+                    <h3>Resume Analyzer with Scoring</h3>
+                    <p>Upload your resume and get an AI-powered score. Identify keywords, formatting issues, and missing sections.</p>
+                </div>
+
+                <div class="service-card">
+                    <div class="service-icon">
+                        <i class="fas fa-search"></i>
+                    </div>
+                    <h3>Job Matching</h3>
+                    <p>Compare your resume against job descriptions. Get a match percentage and see exactly what skills you're missing.</p>
+                </div>
+
+                <div class="service-card">
+                    <div class="service-icon">
+                        <i class="fas fa-pen-nib"></i>
+                    </div>
+                    <h3>Resume Builder</h3>
+                    <p>Create professional resumes with our easy-to-use builder. Choose from modern templates and export to PDF.</p>
+                </div>
+
+                <div class="service-card">
+                    <div class="service-icon">
+                        <i class="fas fa-magic"></i>
+                    </div>
+                    <h3>AI-Powered Suggestions</h3>
+                    <p>Get personalized recommendations to improve your resume and stand out from other applicants.</p>
+                </div>
+
+                <div class="service-card">
+                    <div class="service-icon">
+                        <i class="fas fa-chart-line"></i>
+                    </div>
+                    <h3>ATS Compatibility Check</h3>
+                    <p>Ensure your resume passes Applicant Tracking Systems with our advanced compatibility analysis.</p>
+                </div>
+
+                <div class="service-card">
+                    <div class="service-icon">
+                        <i class="fas fa-headset"></i>
+                    </div>
+                    <h3>24/7 Support</h3>
+                    <p>Get help whenever you need it with our dedicated customer support team available around the clock.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="pricing-comparison">
+        <div class="main-wrapper">
+            <div class="section-header">
+                <h2>Compare All Features</h2>
+                <p>See exactly what each plan includes</p>
+            </div>
+
+            <div class="comparison-table-wrapper">
+                <table class="comparison-table">
+                    <thead>
+                        <tr>
+                            <th class="comparison-feature">Features</th>
+                            <th class="comparison-plan">Free</th>
+                            <th class="comparison-plan featured">Professional</th>
+                            <th class="comparison-plan">Enterprise</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Resume Analyses</td>
+                            <td>1/month</td>
+                            <td>Unlimited</td>
+                            <td>Unlimited</td>
+                        </tr>
+                        <tr>
+                            <td>Job Match Checks</td>
+                            <td>3/month</td>
+                            <td>Unlimited</td>
+                            <td>Unlimited</td>
+                        </tr>
+                        <tr>
+                            <td>Resume Templates</td>
+                            <td><i class="fas fa-check"></i></td>
+                            <td><i class="fas fa-check"></i></td>
+                            <td><i class="fas fa-check"></i></td>
+                        </tr>
+                        <tr>
+                            <td>AI-Powered Suggestions</td>
+                            <td><i class="fas fa-times"></i></td>
+                            <td><i class="fas fa-check"></i></td>
+                            <td><i class="fas fa-check"></i></td>
+                        </tr>
+                        <tr>
+                            <td>PDF Export</td>
+                            <td><i class="fas fa-times"></i></td>
+                            <td><i class="fas fa-check"></i></td>
+                            <td><i class="fas fa-check"></i></td>
+                        </tr>
+                        <tr>
+                            <td>Keyword Analysis</td>
+                            <td>Basic</td>
+                            <td>Advanced</td>
+                            <td>Advanced</td>
+                        </tr>
+                        <tr>
+                            <td>ATS Compatibility Check</td>
+                            <td><i class="fas fa-times"></i></td>
+                            <td><i class="fas fa-check"></i></td>
+                            <td><i class="fas fa-check"></i></td>
+                        </tr>
+                        <tr>
+                            <td>Priority Support</td>
+                            <td><i class="fas fa-times"></i></td>
+                            <td><i class="fas fa-check"></i></td>
+                            <td><i class="fas fa-check"></i></td>
+                        </tr>
+                        <tr>
+                            <td>Team Management</td>
+                            <td><i class="fas fa-times"></i></td>
+                            <td><i class="fas fa-times"></i></td>
+                            <td><i class="fas fa-check"></i></td>
+                        </tr>
+                        <tr>
+                            <td>Custom Integrations (API)</td>
+                            <td><i class="fas fa-times"></i></td>
+                            <td><i class="fas fa-times"></i></td>
+                            <td><i class="fas fa-check"></i></td>
+                        </tr>
+                        <tr>
+                            <td>Dedicated Account Manager</td>
+                            <td><i class="fas fa-times"></i></td>
+                            <td><i class="fas fa-times"></i></td>
+                            <td><i class="fas fa-check"></i></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </section>
+
+    <section class="faq-section">
+        <div class="main-wrapper">
+            <div class="section-header">
+                <h2>Frequently Asked Questions</h2>
+                <p>Everything you need to know about our pricing plans</p>
+            </div>
+
+            <div class="faq-list">
+                <div class="faq-item">
+                    <button class="faq-question" aria-expanded="false">
+                        Can I cancel my subscription anytime?
+                        <i class="fas fa-chevron-down"></i>
+                    </button>
+                    <div class="faq-answer">
+                        Yes, you can cancel your subscription at any time. Your access will continue until the end of your billing period.
+                    </div>
+                </div>
+
+                <div class="faq-item">
+                    <button class="faq-question" aria-expanded="false">
+                        What file formats are supported?
+                        <i class="fas fa-chevron-down"></i>
+                    </button>
+                    <div class="faq-answer">
+                        We support PDF and DOCX files for resume uploads and analysis.
+                    </div>
+                </div>
+
+                <div class="faq-item">
+                    <button class="faq-question" aria-expanded="false">
+                        Is there a free trial for the Professional plan?
+                        <i class="fas fa-chevron-down"></i>
+                    </button>
+                    <div class="faq-answer">
+                        Yes, we offer a 7-day free trial for the Professional plan. No credit card required to start.
+                    </div>
+                </div>
+
+                <div class="faq-item">
+                    <button class="faq-question" aria-expanded="false">
+                        Do you offer refunds?
+                        <i class="fas fa-chevron-down"></i>
+                    </button>
+                    <div class="faq-answer">
+                        We offer a 30-day money-back guarantee for annual subscriptions. Contact support for details.
+                    </div>
+                </div>
+
+                <div class="faq-item">
+                    <button class="faq-question" aria-expanded="false">
+                        Can I change my plan later?
+                        <i class="fas fa-chevron-down"></i>
+                    </button>
+                    <div class="faq-answer">
+                        Yes, you can upgrade or downgrade your plan at any time. Changes take effect at your next billing cycle.
+                    </div>
+                </div>
+
+                <div class="faq-item">
+                    <button class="faq-question" aria-expanded="false">
+                        Is my data secure?
+                        <i class="fas fa-chevron-down"></i>
+                    </button>
+                    <div class="faq-answer">
+                        Yes, we use industry-standard encryption and never share your personal data with third parties.
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="cta-section">
+        <div class="main-wrapper">
+            <h2>Ready to land your dream job?</h2>
+            <p>Join over 50,000 professionals who transformed their careers with Resume AI</p>
+            <div class="cta-buttons">
+                <a href="{{ url_for('auth.login') }}" class="btn btn-light">Start Free Trial</a>
+                <a href="#pricing-container" class="btn btn-outline-light">View Pricing</a>
+            </div>
+        </div>
+    </section>
+
+{% endblock %}
+
+{% block extra_js %}
+    <script src="{{ url_for('static', filename='js/billing-pricing.js') }}"></script>
+{% endblock %}

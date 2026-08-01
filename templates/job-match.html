@@ -1,0 +1,340 @@
+{% extends "base.html" %}
+
+{% block title %}Job Matching - Resume Analyzer{% endblock %}
+
+{% block extra_head %}
+<link rel="stylesheet" href="{{ url_for('static', filename='css/tools-resume-analysis.css') }}">
+{% endblock %}
+
+{% block content %}
+
+    <section class="hero">
+        <div class="main-wrapper">
+            <div class="hero-container">
+                <div class="hero-content">
+                    <h1>Match Your Resume With <span class="highlight">The Right Job</span></h1>
+                    <p>Compare your resume against any job description, get an accurate match score, identify missing skills and keywords, and receive targeted recommendations before you apply.</p>
+                    <div class="hero-actions">
+                        <a href="{{ url_for('tools.resume.match.start') }}" class="btn btn-primary btn-lg">Start Matching <i class="fas fa-arrow-right"></i></a>
+                        <a href="{{ url_for('billing.pricing') }}" class="btn btn-outline btn-lg">View Pricing</a>
+                    </div>
+                </div>
+                <div class="hero-visual">
+                    <div class="hero-card">
+                        <div class="card-header">
+                            <span class="card-dot"></span>
+                            <span class="card-dot"></span>
+                            <span class="card-dot"></span>
+                        </div>
+                        <div class="card-content">
+                            <div class="score-circle">
+                                <svg viewBox="0 0 100 100">
+                                    <circle class="bg" cx="50" cy="50" r="45" />
+                                    <circle class="progress" cx="50" cy="50" r="45" stroke-dasharray="283" stroke-dashoffset="28" />
+                                </svg>
+                                <div class="score-value">87</div>
+                            </div>
+                            <div class="score-label">Job Match Score</div>
+                            <div class="score-bars">
+                                <div class="bar-item"><span>Skills</span><span class="bar-value">92%</span></div>
+                                <div class="bar-item"><span>Keywords</span><span class="bar-value">86%</span></div>
+                                <div class="bar-item"><span>Experience</span><span class="bar-value">88%</span></div>
+                                <div class="bar-item"><span>Qualifications</span><span class="bar-value">80%</span></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="benefits-section">
+        <div class="main-wrapper">
+            <div class="benefits-content">
+                <div class="benefits-text">
+                    <span class="benefits-badge"><i class="fas fa-bullseye"></i> Job Matching Benefits</span>
+                    <h2>Understand Your Fit Before You Spend Time Applying</h2>
+                    <p>Our job matching engine compares your resume with job requirements and gives you a clear view of what is strong, what is missing, and what should be improved for each application.</p>
+                    <ul class="benefits-list">
+                        <li>
+                            <span class="benefit-icon-circle"><i class="fas fa-chart-pie"></i></span>
+                            <span class="benefit-content"><strong>Role-Fit Score</strong><span>Get a clear percentage score based on skills, keywords, experience, education, and qualifications.</span></span>
+                        </li>
+                        <li>
+                            <span class="benefit-icon-circle"><i class="fas fa-key"></i></span>
+                            <span class="benefit-content"><strong>Keyword Gap Analysis</strong><span>Find missing ATS keywords and phrases from the job description that should be added to your resume.</span></span>
+                        </li>
+                        <li>
+                            <span class="benefit-icon-circle"><i class="fas fa-filter"></i></span>
+                            <span class="benefit-content"><strong>ATS Alignment Check</strong><span>Improve your chances of passing automated resume screening by matching recruiter language.</span></span>
+                        </li>
+                        <li>
+                            <span class="benefit-icon-circle"><i class="fas fa-lightbulb"></i></span>
+                            <span class="benefit-content"><strong>Actionable Recommendations</strong><span>Receive specific resume improvements for each job instead of generic career advice.</span></span>
+                        </li>
+                    </ul>
+                </div>
+                <div class="benefits-visual">
+                    <div class="stat-cards-grid">
+                        <div class="stat-card">
+                            <div class="stat-icon"><i class="fas fa-crosshairs"></i></div>
+                            <strong>Targeted Match Report</strong>
+                            <p>Each report is built around the exact job description you want to apply for.</p>
+                        </div>
+                        <div class="stat-card">
+                            <div class="stat-icon"><i class="fas fa-magnifying-glass-chart"></i></div>
+                            <strong>Skill Gap Detection</strong>
+                            <p>Identify required skills that are missing, weak, or need stronger proof in your resume.</p>
+                        </div>
+                        <div class="stat-card">
+                            <div class="stat-icon"><i class="fas fa-file-pdf"></i></div>
+                            <strong>Application-Ready Insights</strong>
+                            <p>Use the report to update your resume before submitting your application.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="features">
+        <div class="main-wrapper">
+            <div class="section-header">
+                <h2>How Job Matching Works</h2>
+                <p>Our matching process turns a job description into a clear resume improvement plan</p>
+            </div>
+            <div class="features-grid">
+                <div class="feature-item">
+                    <div class="feature-icon"><i class="fas fa-paste"></i></div>
+                    <h3>Paste Job Description</h3>
+                    <p>Add the full job posting so the system can extract required skills, responsibilities, and qualifications.</p>
+                </div>
+                <div class="feature-item">
+                    <div class="feature-icon"><i class="fas fa-cloud-upload-alt"></i></div>
+                    <h3>Upload Resume</h3>
+                    <p>Submit your resume in PDF or DOCX format for parsing and comparison.</p>
+                </div>
+                <div class="feature-item">
+                    <div class="feature-icon"><i class="fas fa-key"></i></div>
+                    <h3>Extract Keywords</h3>
+                    <p>The engine identifies high-value keywords, tools, certifications, and role-specific language.</p>
+                </div>
+                <div class="feature-item">
+                    <div class="feature-icon"><i class="fas fa-chart-line"></i></div>
+                    <h3>Score Role Fit</h3>
+                    <p>Your resume is compared across multiple match dimensions to generate an accurate score.</p>
+                </div>
+                <div class="feature-item">
+                    <div class="feature-icon"><i class="fas fa-triangle-exclamation"></i></div>
+                    <h3>Detect Gaps</h3>
+                    <p>Missing skills, weak experience evidence, and low keyword coverage are highlighted clearly.</p>
+                </div>
+                <div class="feature-item">
+                    <div class="feature-icon"><i class="fas fa-list-check"></i></div>
+                    <h3>Improve Resume</h3>
+                    <p>Use targeted suggestions to rewrite bullets, add keywords, and strengthen your application.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="how-it-works">
+        <div class="main-wrapper">
+            <div class="section-header">
+                <h2>What We Compare</h2>
+                <p>Job matching checks the details that influence resume screening and recruiter decisions</p>
+            </div>
+            <div class="steps-grid">
+                <div class="step-item">
+                    <div class="step-icon"><i class="fas fa-code"></i></div>
+                    <h3>Required Skills</h3>
+                    <p>Compare technical, domain, and functional skills listed in the job description.</p>
+                </div>
+                <div class="step-item">
+                    <div class="step-icon"><i class="fas fa-key"></i></div>
+                    <h3>ATS Keywords</h3>
+                    <p>Check whether important keywords appear with enough relevance and placement.</p>
+                </div>
+                <div class="step-item">
+                    <div class="step-icon"><i class="fas fa-briefcase"></i></div>
+                    <h3>Experience Level</h3>
+                    <p>Review seniority, years of experience, ownership, and measurable impact.</p>
+                </div>
+                <div class="step-item">
+                    <div class="step-icon"><i class="fas fa-graduation-cap"></i></div>
+                    <h3>Education & Certifications</h3>
+                    <p>Match required degrees, certifications, licenses, and preferred qualifications.</p>
+                </div>
+                <div class="step-item">
+                    <div class="step-icon"><i class="fas fa-bullseye"></i></div>
+                    <h3>Job Responsibilities</h3>
+                    <p>See whether your resume proves experience with the role's core responsibilities.</p>
+                </div>
+                <div class="step-item">
+                    <div class="step-icon"><i class="fas fa-arrow-circle-up"></i></div>
+                    <h3>Improvement Actions</h3>
+                    <p>Get clear next steps to improve your resume for that specific role.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="sample-report-section">
+        <div class="main-wrapper">
+            <div class="section-header">
+                <h2>See Your Job Match Report</h2>
+                <p>A professional report that highlights role fit, missing keywords, and exact resume improvements</p>
+            </div>
+            <div class="report-mockup">
+                <div class="mockup-header">
+                    <div class="mockup-dots"><span></span><span></span><span></span></div>
+                    <span class="mockup-label">Job Match Report</span>
+                </div>
+                <div class="mockup-body">
+                    <div class="mockup-columns">
+                        <div class="mockup-left">
+                            <div class="mockup-score-block">
+                                <div class="mockup-score-ring">
+                                    <svg viewBox="0 0 100 100">
+                                        <circle class="bg" cx="50" cy="50" r="42" />
+                                        <circle class="progress" cx="50" cy="50" r="42" stroke-dasharray="264" stroke-dashoffset="40" />
+                                    </svg>
+                                    <div class="score-value">87</div>
+                                </div>
+                                <div class="mockup-score-label">Overall Match Score</div>
+                            </div>
+                            <div class="mockup-detail-list">
+                                <div class="mockup-detail-item"><span>Skills</span><strong>92%</strong></div>
+                                <div class="mockup-detail-item"><span>Keywords</span><strong>86%</strong></div>
+                                <div class="mockup-detail-item"><span>Experience</span><strong>88%</strong></div>
+                                <div class="mockup-detail-item"><span>Education</span><strong>80%</strong></div>
+                                <div class="mockup-detail-item"><span>Industry</span><strong>84%</strong></div>
+                                <div class="mockup-detail-item"><span>Evidence</span><strong>82%</strong></div>
+                            </div>
+                        </div>
+                        <div class="mockup-right">
+                            <div class="mockup-findings">
+                                <h4>Key Findings</h4>
+                                <ul>
+                                    <li class="finding-strength"><i class="fas fa-check-circle"></i> Strong match for required technical skills and tools</li>
+                                    <li class="finding-strength"><i class="fas fa-check-circle"></i> Experience level aligns with the target role</li>
+                                    <li class="finding-warning"><i class="fas fa-exclamation-circle"></i> Missing 8 high-priority keywords from the job description</li>
+                                    <li class="finding-warning"><i class="fas fa-exclamation-circle"></i> Add stronger project metrics for leadership responsibilities</li>
+                                    <li class="finding-improve"><i class="fas fa-arrow-circle-up"></i> Rewrite 3 experience bullets to include role-specific keywords</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="scoring-criteria-section">
+        <div class="main-wrapper">
+            <div class="section-header">
+                <h2>Match Scoring Criteria</h2>
+                <p>Your resume is scored across six job-specific categories to show exactly why a role is a strong or weak fit</p>
+            </div>
+            <div class="criteria-grid">
+                <div class="criteria-card">
+                    <div class="criteria-header">
+                        <div class="criteria-icon"><i class="fas fa-code"></i></div>
+                        <h3>Skills Match</h3>
+                        <span class="criteria-score">30%</span>
+                    </div>
+                    <p>Compares required and preferred skills against your skills section, projects, and work history.</p>
+                </div>
+                <div class="criteria-card">
+                    <div class="criteria-header">
+                        <div class="criteria-icon"><i class="fas fa-key"></i></div>
+                        <h3>Keyword Coverage</h3>
+                        <span class="criteria-score">20%</span>
+                    </div>
+                    <p>Checks important job description terms, role language, tools, and ATS screening keywords.</p>
+                </div>
+                <div class="criteria-card">
+                    <div class="criteria-header">
+                        <div class="criteria-icon"><i class="fas fa-briefcase"></i></div>
+                        <h3>Experience Fit</h3>
+                        <span class="criteria-score">20%</span>
+                    </div>
+                    <p>Evaluates seniority, years of experience, responsibilities, and measurable achievements.</p>
+                </div>
+                <div class="criteria-card">
+                    <div class="criteria-header">
+                        <div class="criteria-icon"><i class="fas fa-graduation-cap"></i></div>
+                        <h3>Education & Certifications</h3>
+                        <span class="criteria-score">10%</span>
+                    </div>
+                    <p>Reviews degrees, licenses, certifications, courses, and required professional qualifications.</p>
+                </div>
+                <div class="criteria-card">
+                    <div class="criteria-header">
+                        <div class="criteria-icon"><i class="fas fa-industry"></i></div>
+                        <h3>Industry Relevance</h3>
+                        <span class="criteria-score">10%</span>
+                    </div>
+                    <p>Checks whether your background aligns with the company, domain, and role expectations.</p>
+                </div>
+                <div class="criteria-card">
+                    <div class="criteria-header">
+                        <div class="criteria-icon"><i class="fas fa-file-alt"></i></div>
+                        <h3>Resume Evidence</h3>
+                        <span class="criteria-score">10%</span>
+                    </div>
+                    <p>Measures whether your resume clearly proves claims with metrics, context, and strong bullets.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="faq-section">
+        <div class="main-wrapper">
+            <div class="section-header">
+                <h2>Frequently Asked Questions</h2>
+                <p>Everything you need to know about job matching and match scores</p>
+            </div>
+            <div class="faq-list">
+                <div class="faq-item">
+                    <button class="faq-question" type="button" aria-expanded="false">
+                        What does the job match score mean?
+                        <i class="fas fa-chevron-down"></i>
+                    </button>
+                    <div class="faq-answer">The match score compares your resume against the job description across skills, keywords, experience, education, industry relevance, and resume evidence.</div>
+                </div>
+                <div class="faq-item">
+                    <button class="faq-question" type="button" aria-expanded="false">
+                        Does a high match score guarantee an interview?
+                        <i class="fas fa-chevron-down"></i>
+                    </button>
+                    <div class="faq-answer">No score can guarantee an interview, but a high match score means your resume is better aligned with the job requirements and more likely to pass screening.</div>
+                </div>
+                <div class="faq-item">
+                    <button class="faq-question" type="button" aria-expanded="false">
+                        How are missing keywords selected?
+                        <i class="fas fa-chevron-down"></i>
+                    </button>
+                    <div class="faq-answer">The system extracts important terms from the job description and checks whether those terms appear in your resume with enough relevance and context.</div>
+                </div>
+                <div class="faq-item">
+                    <button class="faq-question" type="button" aria-expanded="false">
+                        Can I use job matching for multiple applications?
+                        <i class="fas fa-chevron-down"></i>
+                    </button>
+                    <div class="faq-answer">Yes. You can compare the same resume against multiple job descriptions and prioritize the roles where your profile is strongest.</div>
+                </div>
+                <div class="faq-item">
+                    <button class="faq-question" type="button" aria-expanded="false">
+                        What file formats are supported?
+                        <i class="fas fa-chevron-down"></i>
+                    </button>
+                    <div class="faq-answer">PDF and DOCX files are supported for resume uploads. For best results, use a text-based PDF or editable DOCX file.</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+{% endblock %}
+
+{% block extra_js %}{% endblock %}

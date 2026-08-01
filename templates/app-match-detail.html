@@ -1,0 +1,84 @@
+{% extends "base.html" %}
+
+{% block title %}Match Details - Session #{{ session.id }}{% endblock %}
+
+{% block extra_head %}
+<link rel="stylesheet" href="{{ url_for('static', filename='css/app-results.css') }}" />
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet" />
+{% endblock %}
+
+{% block navbar %}{% endblock %}
+{% block footer %}{% endblock %}
+
+{% block content %}
+    <div class="container">
+        <a href="{{ url_for('app.match.history') }}" class="back-link">
+            <i class="fas fa-arrow-left"></i> Back to Match History
+        </a>
+
+        <div class="detail-header-card">
+            <h1>
+                <i class="fas fa-file-contract"></i> Match Session #{{ session.id }}
+            </h1>
+            <div class="detail-meta">
+                <div class="meta-item">
+                    <i class="fas fa-calendar"></i> {{ session.created_at.strftime("%Y-%m-%d %H:%M") }}
+                </div>
+                <div class="meta-item">
+                    <i class="fas fa-file-pdf"></i> {{ results|length }} Resume(s)
+                </div>
+                {% if results %}
+                    <div class="meta-item">
+                        <i class="fas fa-star"></i> Best Match: {{ results[0].match_score }}%
+                    </div>
+                {% endif %}
+            </div>
+        </div>
+
+        <div class="job-description-box">
+            <h3>
+                <i class="fas fa-briefcase"></i> Job Description
+            </h3>
+            <p>{{ job_description }}</p>
+        </div>
+
+        <h2 class="section-title">
+            <i class="fas fa-list"></i> Matched Resumes
+        </h2>
+
+        {% if results %}
+            <div class="results-grid">
+                {% for result in results %}
+                    {% set score_pct = result.match_score %}
+                    <div class="result-card">
+                        <div class="result-card-header">
+                            <div class="result-filename">
+                                <i class="fas fa-file-pdf file-icon-pdf"></i>
+                                {{ result.filename }}
+                            </div>
+                            <div class="score-circle {% if score_pct >= 70 %}score-high{% elif score_pct >= 40 %}score-medium{% else %}score-low{% endif %}">
+                                <svg width="60" height="60">
+                                    <circle class="bg" cx="30" cy="30" r="24"></circle>
+                                    <circle class="progress" cx="30" cy="30" r="24" stroke-dasharray="150.79" stroke-dashoffset="{{ 150.79 - (150.79 * score_pct / 100) }}"></circle>
+                                </svg>
+                                <span class="score-text">{{ score_pct }}%</span>
+                            </div>
+                        </div>
+                        <div class="progress-bar">
+                            <div class="progress-fill {% if score_pct >= 70 %}progress-green{% elif score_pct >= 40 %}progress-yellow{% else %}progress-red{% endif %}" data-width="{{ score_pct }}"></div>
+                        </div>
+                        <div class="match-label">
+                            <i class="fas fa-percentage"></i> Similarity: {{ (result.similarity * 100)|round(1) }}%
+                        </div>
+                    </div>
+                {% endfor %}
+            </div>
+        {% else %}
+            <div class="empty-state">
+                <i class="fas fa-exclamation-circle"></i>
+                <h3>No Results Found</h3>
+                <p>No resume matches were found for this session.</p>
+            </div>
+        {% endif %}
+    </div>
+{% endblock %}

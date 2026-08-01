@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>{% block title %}Resume AI{% endblock %}</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/site-core.css') }}" />
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/site-sections.css') }}" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    {% block extra_head %}{% endblock %}
+</head>
+<body {% block body_attributes %}{% endblock %}>
+    {% block navbar %}
+    <nav class="navbar">
+        <div class="main-wrapper nav-wrapper">
+            <a href="{{ url_for('public.home') }}" class="nav-logo">
+                <img src="{{ url_for('static', filename='images/logo.png') }}" alt="Resume AI Logo" />
+            </a>
+            <ul class="nav-menu">
+                <li>
+                    <a href="{{ url_for('public.home') }}" class="nav-link">Home</a>
+                </li>
+                <li class="nav-item dropdown">
+                    <a href="#" class="nav-link">Services <i class="fas fa-chevron-down"></i></a>
+                    <ul class="dropdown-menu">
+                        <li>
+                            <a href="{{ url_for('tools.resume.analysis') }}"><i class="fas fa-file-alt"></i> Resume Analyzer</a>
+                        </li>
+                        <li>
+                            <a href="{{ url_for('tools.job.match') }}"><i class="fas fa-search"></i> Job Matching</a>
+                        </li>
+                        <li>
+                            <a href="{{ url_for('tools.resume.builder') }}"><i class="fas fa-pen-nib"></i> Resume Builder</a>
+                        </li>
+                    </ul>
+                </li>
+                <li>
+                    <a href="{{ url_for('billing.pricing') }}" class="nav-link">Pricing</a>
+                </li>
+                {% if session.get('user_id') %}
+                    <li>
+                        <a href="{{ url_for('app.dashboard') }}" class="nav-link">Dashboard</a>
+                    </li>
+                    <li>
+                        <a href="{{ url_for('auth.logout') }}" class="btn btn-outline">Logout</a>
+                    </li>
+                {% else %}
+                    <li>
+                        <a href="{{ url_for('auth.login') }}" class="btn btn-primary">Get Started</a>
+                    </li>
+                {% endif %}
+            </ul>
+            <button class="mobile-toggle" aria-label="Toggle menu">
+                <i class="fas fa-bars"></i>
+            </button>
+        </div>
+    </nav>
+    {% endblock %}
+
+    {% block content %}{% endblock %}
+
+    {% block footer %}
+    <footer class="footer">
+        <div class="footer-container">
+            <div class="footer-grid">
+                <div class="footer-brand">
+                    <a href="{{ url_for('public.home') }}">
+                        <img src="{{ url_for('static', filename='images/logo.png') }}" alt="Resume AI" />
+                    </a>
+                    <p>AI-powered resume builder and analyzer to help you land your dream job.</p>
+                    <div class="footer-social">
+                        <a href="#"><i class="fab fa-twitter"></i></a>
+                        <a href="#"><i class="fab fa-linkedin"></i></a>
+                        <a href="#"><i class="fab fa-facebook"></i></a>
+                    </div>
+                </div>
+                <div class="footer-links">
+                    <h4>Services</h4>
+                    <ul>
+                        <li><a href="{{ url_for('tools.resume.analysis') }}">Resume Analyzer</a></li>
+                        <li><a href="{{ url_for('tools.job.match') }}">Job Matching</a></li>
+                        <li><a href="{{ url_for('tools.resume.builder') }}">Resume Builder</a></li>
+                    </ul>
+                </div>
+                <div class="footer-links">
+                    <h4>Company</h4>
+                    <ul>
+                        <li><a href="{{ url_for('billing.pricing') }}">Pricing</a></li>
+                        <li><a href="#">About Us</a></li>
+                        <li><a href="#">Contact</a></li>
+                    </ul>
+                </div>
+                <div class="footer-links">
+                    <h4>Legal</h4>
+                    <ul>
+                        <li><a href="#">Privacy Policy</a></li>
+                        <li><a href="#">Terms of Service</a></li>
+                        <li><a href="#">Cookie Policy</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2026 Resume AI. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+    {% endblock %}
+
+    <script src="{{ url_for('static', filename='js/site-common.js') }}"></script>
+    {% block extra_js %}{% endblock %}
+</body>
+</html>

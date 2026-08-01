@@ -1,0 +1,110 @@
+{% extends "base.html" %}
+
+{% block title %}Login - Resume Analyzer{% endblock %}
+
+{% block extra_head %}
+<link rel="stylesheet" href="{{ url_for('static', filename='css/auth-access.css') }}" />
+{% endblock %}
+
+{% block navbar %}{% endblock %}
+{% block footer %}{% endblock %}
+
+{% block content %}
+    <main class="auth-page-wrapper">
+        <div class="auth-card">
+            <aside class="auth-left-panel">
+                <a href="{{ url_for('public.home') }}" class="auth-brand">
+                    <img src="{{ url_for('static', filename='images/logo.png') }}" alt="Resume AI Logo" />
+                </a>
+                <h1>Welcome back to your career dashboard</h1>
+                <p>Sign in to access AI-powered resume analysis, job matching, and personalized career insights.</p>
+                <div class="auth-feature-list">
+                    <div>
+                        <i class="fas fa-file-contract"></i>
+                        <span>Resume analysis and scoring</span>
+                    </div>
+                    <div>
+                        <i class="fas fa-bullseye"></i>
+                        <span>Job description matching</span>
+                    </div>
+                    <div>
+                        <i class="fas fa-wand-magic-sparkles"></i>
+                        <span>AI-powered improvement tips</span>
+                    </div>
+                </div>
+            </aside>
+
+            <section class="auth-right-panel">
+                <div class="auth-form-card">
+                    <div class="auth-form-header">
+                        <h2>Sign in to your account</h2>
+                        <p>Enter your details to continue to your Resume AI workspace.</p>
+                    </div>
+
+                    {% with messages = get_flashed_messages(with_categories=true) %}
+                        {% if messages %}
+                            <ul class="flashes">
+                                {% for category, message in messages %}
+                                    <li class="{{ category }}">{{ message }}</li>
+                                {% endfor %}
+                            </ul>
+                        {% endif %}
+                    {% endwith %}
+
+                    <form class="auth-form" action="{{ url_for('auth.login') }}" method="post">
+                        {% if redirect_url %}
+                            <input type="hidden" name="redirect" value="{{ redirect_url }}" />
+                        {% endif %}
+
+                        <div class="auth-field">
+                            <label for="email">Email Address</label>
+                            <div class="auth-input-wrap">
+                                <i class="fas fa-envelope"></i>
+                                <input type="email" name="email" id="email" placeholder="you@example.com" autocomplete="email" required />
+                            </div>
+                        </div>
+
+                        <div class="auth-field">
+                            <label for="password">Password</label>
+                            <div class="auth-input-wrap">
+                                <i class="fas fa-lock"></i>
+                                <input class="password-toggle-input" type="password" name="password" id="password" placeholder="Enter your password" autocomplete="current-password" required />
+                                <button class="password-toggle" type="button" aria-label="Show password">
+                                    <i class="fas fa-eye"></i>
+                                </button>
+                            </div>
+                        </div>
+
+                        <div class="auth-options">
+                            <label class="auth-checkbox">
+                                <input type="checkbox" name="remember" />
+                                <span>Remember me</span>
+                            </label>
+                            <a class="auth-link" href="{{ url_for('auth.forgot-password') }}">Forgot password?</a>
+                        </div>
+
+                        <button class="btn btn-primary auth-submit" type="submit">Sign In</button>
+                    </form>
+
+                    <div class="auth-divider">
+                        <span>or continue with</span>
+                    </div>
+
+                    <div class="auth-social">
+                        <button class="auth-social-btn" type="button"><i class="fab fa-google"></i> Google</button>
+                        <button class="auth-social-btn" type="button"><i class="fab fa-linkedin-in"></i> LinkedIn</button>
+                    </div>
+
+                    <p class="auth-footer">
+                        Don't have an account? <a href="{{ url_for('auth.register') }}">Create free account</a>
+                    </p>
+                </div>
+            </section>
+        </div>
+    </main>
+
+{% endblock %}
+
+{% block extra_js %}
+<script src="{{ url_for('static', filename='js/auth-login.js') }}"></script>
+{% endblock %}
