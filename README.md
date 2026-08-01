@@ -232,19 +232,19 @@ http://127.0.0.1:5000
 
 # 📋 Team Members
 
-| Name | Student ID | Department | University |
-|------|------------|------------|------------|
-| Farhana Tasnin | 222311053 | Department of Computer Science & Engineering | Varendra University |
-| Katamun Jannat | 222311058 | Department of Computer Science & Engineering | Varendra University |
-| **Md. Ratan Ali** | **222311069** | **Department of Computer Science & Engineering** | **Varendra University** |
+| Name | Student ID | Department | University | URL |
+|------|------------|------------|------------|-----|
+| Farhana Tasnin | 222311053 | Department of Computer Science & Engineering | Varendra University | *(GitHub/LinkedIn Profile)* |
+| Katamun Jannat | 222311058 | Department of Computer Science & Engineering | Varendra University | *(GitHub/LinkedIn Profile)* |
+| **Md. Ratan Ali** | **222311069** | **Department of Computer Science & Engineering** | **Varendra University** | **https://github.com/themdratanali** |
 
 ---
 
-# 👨‍🏫 Supervisor
+## 👨‍🏫 Supervisor
 
-| Name | Designation |
-|------|-------------|
-| **Md. Fatin Ilham** | Lecturer, Department of Computer Science & Engineering, Varendra University |
+| Name | Designation | URL |
+|------|-------------|-----|
+| **Md. Fatin Ilham** | Lecturer, Department of Computer Science & Engineering, Varendra University | *https://www.linkedin.com/in/fatin-ilham/* |
 
 ---
 
