@@ -524,6 +524,36 @@ Feel free to use it for learning and research with proper attribution.
 
 ---
 
+# Documents
+
+All project-related documents are available through the Google Drive folder below.
+
+> **📥 Download the complete project documentation, including the project report, presentation, diagrams, screenshots, source code, and other supporting materials.**
+
+<div align="center">
+
+### 📂 Project Documents
+
+**🔗 Google Drive Folder**
+
+👉 **[Download All Project Documents](https://drive.google.com/drive/folders/1qeLywqRJelC2JcpkH5ZYJUHTkFq5WXbl?usp=sharing)**
+
+</div>
+
+---
+
+### Available Documents
+
+| Document | Description |
+|:---------|:------------|
+| 📘 Project Report | Complete Final Year Project documentation |
+| 📑 Project Proposal | Initial project proposal |
+| 📊 Presentation (PPT/PPTX) | Project presentation slides |
+| 🖼️ Diagrams | UML, ER, DFD, Architecture, Workflow diagrams |
+| 💻 Source Code | Complete project source code |
+
+> **Note:** If you encounter any issues accessing the files, please ensure you have permission to view the shared Google Drive folder.
+
 # Acknowledgements
 
 We would like to express our sincere gratitude to our respected supervisor **Md. Fatin Ilham**, Lecturer, Department of Computer Science and Engineering, Varendra University, for his continuous guidance, valuable suggestions, and encouragement throughout the development of this project.
