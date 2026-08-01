@@ -410,45 +410,6 @@ The application uses **SQLite** to securely store user and analysis data.
 
 ---
 
-# Screenshots
-
-> Add screenshots after uploading the project to GitHub.
-
-```
-assets/
-
-├── home.png
-├── login.png
-├── dashboard.png
-├── upload.png
-├── ats-report.png
-├── matching-result.png
-```
-
-Example:
-
-```md
-## Home Page
-
-<p align="center">
-<img src="assets/home.png" width="90%">
-</p>
-
-## ATS Report
-
-<p align="center">
-<img src="assets/ats-report.png" width="90%">
-</p>
-
-## Resume Matching
-
-<p align="center">
-<img src="assets/matching-result.png" width="90%">
-</p>
-```
-
----
-
 # Team
 
 | Name | Student ID | Department | Profile |
@@ -532,17 +493,13 @@ All project-related documents are available through the Google Drive folder belo
 
 <div align="center">
 
-### 📂 Project Documents
-
 **🔗 Google Drive Folder**
 
 👉 **[Download All Project Documents](https://drive.google.com/drive/folders/1qeLywqRJelC2JcpkH5ZYJUHTkFq5WXbl?usp=sharing)**
 
 </div>
 
----
-
-### Available Documents
+Available Documents
 
 | Document | Description |
 |:---------|:------------|
@@ -553,6 +510,7 @@ All project-related documents are available through the Google Drive folder belo
 | 💻 Source Code | Complete project source code |
 
 > **Note:** If you encounter any issues accessing the files, please ensure you have permission to view the shared Google Drive folder.
+---
 
 # Acknowledgements
 
