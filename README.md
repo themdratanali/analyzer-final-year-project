@@ -1,4 +1,4 @@
-# AI-Powered Resume Analyzer and Resume Matching System
+# Resume Analyzer and Resume Matching System
 
 <p align="center">
   <img src="assets/logo.png" width="120" alt="Project Logo">
