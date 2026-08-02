@@ -291,8 +291,6 @@ AI-Resume-Analyzer/
 
 ---
 
----
-
 # Installation
 
 ## Prerequisites
