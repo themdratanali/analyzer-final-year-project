@@ -428,26 +428,6 @@ The application uses **SQLite** to securely store user and analysis data.
 
 ---
 
-# Future Improvements
-
-The current system provides a strong foundation for intelligent recruitment. Future enhancements include:
-
-- Multi-language Resume Analysis
-- Cloud Deployment
-- Recruiter Dashboard
-- Resume Benchmarking
-- Skill Gap Analysis
-- AI Interview Recommendation
-- Deep Learning Models
-- Resume Ranking Dashboard
-- Email Notifications
-- Online Job Portal Integration
-- REST API
-- Docker Support
-- CI/CD Pipeline
-
----
-
 # Contributing
 
 Contributions are welcome.
