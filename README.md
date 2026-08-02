@@ -499,16 +499,6 @@ All project-related documents are available through the Google Drive folder belo
 
 </div>
 
-Available Documents
-
-| Document | Description |
-|:---------|:------------|
-| 📘 Project Report | Complete Final Year Project documentation |
-| 📑 Project Proposal | Initial project proposal |
-| 📊 Presentation (PPT/PPTX) | Project presentation slides |
-| 🖼️ Diagrams | UML, ER, DFD, Architecture, Workflow diagrams |
-| 💻 Source Code | Complete project source code |
-
 > **Note:** If you encounter any issues accessing the files, please ensure you have permission to view the shared Google Drive folder.
 ---
 
