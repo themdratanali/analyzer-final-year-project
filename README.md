@@ -2,7 +2,7 @@
 
 # Resume Analyzer & Resume Matching System
 
-### Intelligent ATS Resume Analysis and Semantic Resume Matching Using NLP & Machine Learning
+### ATS Resume Analysis and Semantic Resume Matching Using NLP & Machine Learning
 
 <p align="center">
 
