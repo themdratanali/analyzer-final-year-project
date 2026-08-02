@@ -414,9 +414,9 @@ The application uses **SQLite** to securely store user and analysis data.
 
 | Name | Student ID | Department | Profile |
 |:-----|:----------:|:-----------|:---------|
-| **Farhana Tasnin** | 222311053 | Department of Computer Science & Engineering, Varendra University | *Add GitHub / LinkedIn* |
-| **Katamun Jannat** | 222311058 | Department of Computer Science & Engineering, Varendra University | *Add GitHub / LinkedIn* |
-| **Md. Ratan Ali** | **222311069** | Department of Computer Science & Engineering, Varendra University | **[GitHub](https://github.com/themdratanali)** • **[LinkedIn](https://linkedin.com/in/mdratanali)** |
+| **Farhana Tasnin** (UI/UX Designer)| 222311053 | Department of Computer Science & Engineering, Varendra University | *GitHub / LinkedIn* |
+| **Katamun Jannat** (Frontend Developer)| 222311058 | Department of Computer Science & Engineering, Varendra University | *GitHub / LinkedIn* |
+| **Md. Ratan Ali** (Backend Developer & Project Maintainer) | **222311069** | Department of Computer Science & Engineering, Varendra University | **[GitHub](https://github.com/themdratanali)** • **[LinkedIn](https://linkedin.com/in/mdratanali)** |
 
 ---
 
@@ -499,7 +499,6 @@ All project-related documents are available through the Google Drive folder belo
 
 </div>
 
-> **Note:** If you encounter any issues accessing the files, please ensure you have permission to view the shared Google Drive folder.
 ---
 
 # Acknowledgements
@@ -509,16 +508,6 @@ We would like to express our sincere gratitude to our respected supervisor **Md.
 We also thank the Department of Computer Science and Engineering, Varendra University, for providing the academic environment and support necessary to successfully complete this project.
 
 Special thanks to everyone who contributed directly or indirectly to the successful completion of this project.
-
----
-
-# Authors
-
-| Name | Role |
-|:-----|:-----|
-| **Md. Ratan Ali** | Backend Developer & Project Maintainer |
-| **Farhana Tasnin** | Frontend Developer |
-| **Katamun Jannat** | UI/UX Designer  |
 
 ---
 
